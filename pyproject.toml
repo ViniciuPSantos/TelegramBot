@@ -1,0 +1,54 @@
+[project]
+name = "assistant"
+version = "0.1.0"
+description = "Assistente pessoal no Telegram: lembretes, monitor de preços, resumo diário e RAG com PDFs."
+readme = "README.md"
+authors = [
+    { name = "ViniciuPSantos", email = "vipaulasantos@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "alembic>=1.20.1",
+    "apscheduler>=3.10,<4",
+    "httpx>=0.28.1",
+    "pydantic-settings>=2.16.2",
+    "python-telegram-bot>=21",
+    "sqlalchemy[asyncio]>=2",
+    "tzdata>=2026.6",
+]
+
+[project.scripts]
+assistant = "assistant:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+link-mode = "copy"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruf]
+line-length = 100
+target-version = "py312"
+
+[tool.ruf.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "ASYNC"
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
