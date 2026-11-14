@@ -154,9 +154,4 @@ tests/
 
 [MIT](LICENSE)
 
-O bloco começa com quatro crases (````) porque o README tem blocos de código dentro dele. Copie só o que está entre a primeira e a última linha.
-
-- O diagrama mermaid é renderizado automaticamente pelo GitHub como um fluxograma. Depois do push, vale abrir o repositório no site para conferir.
-- A seção "Decisões principais" é a mais importante para portfólio. Quem avalia o projeto quer entender por que ele foi feito assim, e essa seção também é um bom roteiro para entrevistas.
-
 ---
