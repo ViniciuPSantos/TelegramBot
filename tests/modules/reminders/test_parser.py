@@ -50,6 +50,9 @@ def test_parse_valid_input(raw: str, expected_due: datetime, expected_text: str)
         "15/11 pagar fatura --antes 3",
         "15/11 --antes 3 pagar fatura",
         "--antes 3 15/11 pagar fatura",
+        # O Telegram troca "--" por travessão automaticamente.
+        "15/11 pagar fatura —antes 3",
+        "15/11 pagar fatura –antes 3",
     ],
 )
 def test_extracts_days_before_from_any_position(raw: str) -> None:

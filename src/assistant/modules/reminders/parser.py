@@ -6,7 +6,7 @@ MAX_DAYS_BEFORE = 60
 
 _DATE_RE = re.compile(r"^(\d{1,2})/(\d{1,2})(?:/(\d{4}))?$")
 _TIME_RE = re.compile(r"^(\d{1,2}):(\d{2})$")
-_DAYS_BEFORE_RE = re.compile(r"--antes(?:\s+(\S+))?")
+_DAYS_BEFORE_RE = re.compile(r"(?:--|[—–])antes(?:\s+(\S+))?")
 
 
 class ReminderParseError(ValueError):
