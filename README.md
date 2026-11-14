@@ -5,8 +5,9 @@
 Assistente pessoal no Telegram, construído como um **hub de módulos**: cada funcionalidade (lembretes, monitor de preços, resumo diário...) é um módulo independente que se pluga no bot.
 
 > Projeto pessoal de estudo de Python moderno (async, SQLAlchemy 2.0, type hints), com foco em arquitetura limpa, testes e deploy com Docker.
-> 
-> ## ✨ Funcionalidades
+>
+
+ ## ✨ Funcionalidades
 
 **Fase 1: Lembretes** ✅
 
@@ -59,7 +60,8 @@ Python 3.12+ · [uv](https://docs.astral.sh/uv/) · python-telegram-bot 21+ · A
 
 > ⚠️ O token dá controle total do bot. Nunca o coloque em código ou commit. Se vazar, gere outro com `/revoke` no BotFather.
 > 
-> ### 2. Configure
+
+### 2. Configure
 
 ```bash
 cp .env.example .env
@@ -83,6 +85,25 @@ uv sync
 uv run alembic upgrade head
 uv run assistant
 ```
+
+## ☁️ Deploy
+
+Em produção, o bot roda numa VPS com [Coolify](https://coolify.io), a partir do mesmo `Dockerfile`:
+
+```mermaid
+flowchart LR
+    PR[Pull request] --> CI[GitHub Actions<br/>lint · testes · migrations · build]
+    CI -->|checks verdes| M[merge na main]
+    M -->|webhook| C[Coolify]
+    C --> B[build da imagem]
+    B --> R[container no ar]
+```
+
+- A `main` é protegida: só recebe código via PR, com os checks do CI passando
+- Cada merge dispara um deploy automático (GitHub App + webhook)
+- O banco SQLite fica num volume persistente, e as migrations rodam a cada subida do container
+- O token e as demais configurações sensíveis ficam só no Coolify, disponíveis apenas em runtime (nunca no build da imagem)
+- O container não expõe portas (long polling) e tem limites de CPU e memória, para não competir com outros serviços da VPS
 
 ## ⚙️ Configuração
 
