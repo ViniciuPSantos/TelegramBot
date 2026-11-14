@@ -1,4 +1,4 @@
-from telegram import Update
+from telegram import BotCommand, Update
 from telegram.ext import ContextTypes
 
 WELCOME_TEXT = (
@@ -10,6 +10,13 @@ WELCOME_TEXT = (
     "/lembretes: lista os pendentes\n"
     "/concluidos: últimos 10 concluídos"
 )
+
+BOT_COMMANDS = [
+    BotCommand("start", "Boas-vindas e lista de comandos"),
+    BotCommand("lembrete", "Cria um lembrete"),
+    BotCommand("lembretes", "Lista os lembretes pendentes"),
+    BotCommand("concluidos", "Ultimos lembretes concluidos"),
+]
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
