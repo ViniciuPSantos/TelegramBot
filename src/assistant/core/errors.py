@@ -6,9 +6,7 @@ from telegram.ext import ContextTypes
 
 logger = logging.getLogger(__name__)
 
-FRIENDLY_ERROR = (
-    "😕 Algo deu errado ao processar seu comando. Tente novamente em instantes."
-)
+FRIENDLY_ERROR = "😕 Algo deu errado ao processar seu comando. Tente novamente em instantes."
 
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:

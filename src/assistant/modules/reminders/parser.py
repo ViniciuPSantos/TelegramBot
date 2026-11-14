@@ -59,9 +59,7 @@ def _extract_days_before(raw: str) -> tuple[str, int | None]:
 
     value = match.group(1)
     if value is None or not value.isdigit() or not 1 <= int(value) <= MAX_DAYS_BEFORE:
-        raise ReminderParseError(
-            f"Use --antes com um número de dias entre 1 e {MAX_DAYS_BEFORE}."
-        )
+        raise ReminderParseError(f"Use --antes com um número de dias entre 1 e {MAX_DAYS_BEFORE}.")
 
     return raw[: match.start()] + raw[match.end() :], int(value)
 

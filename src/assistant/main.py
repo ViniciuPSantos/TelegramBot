@@ -13,11 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 def build_application(settings: Settings) -> Application:
-    app = (
-        Application.builder()
-        .token(settings.telegram_bot_token.get_secret_value())
-        .build()
-    )
+    app = Application.builder().token(settings.telegram_bot_token.get_secret_value()).build()
 
     app.add_handler(build_auth_handler(settings.allowed_chat_id), group=-1)
     app.add_handler(CommandHandler("start", start))

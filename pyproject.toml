@@ -35,11 +35,11 @@ dev = [
     "ruff>=0.17.5",
 ]
 
-[tool.ruf]
+[tool.ruff]
 line-length = 100
 target-version = "py312"
 
-[tool.ruf.lint]
+[tool.ruff.lint]
 select = [
     "E",
     "F",
@@ -54,3 +54,6 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 addopts = ["--import-mode=importlib"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["alembic"]

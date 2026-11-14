@@ -36,9 +36,7 @@ def parse(raw: str) -> ParsedReminder:
         ("20/11 2 pacotes", dt(2026, 11, 20, 9, 0), "2 pacotes"),
     ],
 )
-def test_parse_valid_input(
-    raw: str, expected_due: datetime, expected_text: str
-) -> None:
+def test_parse_valid_input(raw: str, expected_due: datetime, expected_text: str) -> None:
     result = parse(raw)
 
     assert result.due_at == expected_due
