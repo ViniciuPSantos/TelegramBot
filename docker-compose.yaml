@@ -1,0 +1,14 @@
+services:
+  bot:
+    build: .
+    image: telegram-assistant
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite+aiosqlite:////app/data/assistant.db
+      LOG_FORMAT: json
+    volumes:
+      - bot-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  bot-data:
