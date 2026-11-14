@@ -1,5 +1,7 @@
 # 🤖 Telegram Assistant
 
+[![CI](https://github.com/ViniciuPSantos/TelegramBot/actions/workflows/ci.yml/badge.svg)](https://github.com/ViniciuPSantos/TelegramBot/actions/workflows/ci.yml)
+
 Assistente pessoal no Telegram, construído como um **hub de módulos**: cada funcionalidade (lembretes, monitor de preços, resumo diário...) é um módulo independente que se pluga no bot.
 
 > Projeto pessoal de estudo de Python moderno (async, SQLAlchemy 2.0, type hints), com foco em arquitetura limpa, testes e deploy com Docker.

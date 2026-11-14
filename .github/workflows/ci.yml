@@ -1,0 +1,48 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+jobs:
+  checks:
+    name: Lint, testes e migrations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.7"
+          enable-cache: true
+
+      - name: Instalar dependências
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Formatação
+        run: uv run ruff format --check .
+
+      - name: Testes
+        run: uv run pytest -q
+
+      - name: Migrations em dia com os models
+        env:
+          TELEGRAM_BOT_TOKEN: "123:ci-fake"
+          ALLOWED_CHAT_ID: "1"
+          DATABASE_URL: sqlite+aiosqlite:///./data/ci.db
+        run: |
+          uv run alembic upgrade head
+          uv run alembic check
+
+  docker:
+    name: Build da imagem
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t telegram-assistant .
