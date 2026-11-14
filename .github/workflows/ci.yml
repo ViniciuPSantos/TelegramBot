@@ -34,7 +34,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: "123:ci-fake"
           ALLOWED_CHAT_ID: "1"
-          DATABASE_URL: sqlite+aios
+          DATABASE_URL: sqlite+aiosqlite:///./data/ci.db
         run: |
           uv run alembic upgrade head
           uv run alembic check
