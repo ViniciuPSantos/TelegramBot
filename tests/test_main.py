@@ -5,15 +5,17 @@ from assistant.main import build_application, build_context
 from assistant.modules.reminders.jobs import DISPATCH_JOB_ID
 
 
-def test_application_wires_commands_and_jobs() -> None:
-    # _env_file=None: o teste não depende do .env da máquina.
-    settings = Settings(
-        _env_file=None,  # type: ignore[call-arg]
+def make_settings() -> Settings:
+    return Settings(
+        _env_file=None,
         telegram_bot_token="123:fake",
         allowed_chat_id=1,
         database_url="sqlite+aiosqlite:///:memory:",
     )
-    ctx = build_context(settings)
+
+
+def test_application_wires_commands_and_jobs() -> None:
+    ctx = build_context(make_settings())
 
     app = build_application(ctx)
 
@@ -26,3 +28,13 @@ def test_application_wires_commands_and_jobs() -> None:
     assert {"start", "lembrete", "lembretes", "concluidos"} <= commands
     assert any(isinstance(h, CallbackQueryHandler) for h in app.handlers[0])
     assert ctx.scheduler.get_job(DISPATCH_JOB_ID) is not None
+
+
+async def test_shutdown_works_even_if_startup_never_ran() -> None:
+    # Ex.: token inválido derruba a subida antes do post_init, mas o post_shutdown roda mesmo assim.
+    ctx = build_context(make_settings())
+    app = build_application(ctx)
+
+    await ctx.shutdown(app)
+
+    assert not ctx.scheduler.running

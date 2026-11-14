@@ -1,0 +1,17 @@
+# Só o que o Dockerfile usa entra no contexto do build.
+.git
+.venv
+.idea
+.vscode
+.ruff_cache
+.pytest_cache
+.github
+**/__pycache__
+*.py[oc]
+
+# Segredos e dados locais nunca vão para a imagem.
+.env
+data
+*.db
+
+tests

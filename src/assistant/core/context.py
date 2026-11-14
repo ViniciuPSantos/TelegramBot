@@ -26,6 +26,7 @@ class AppContext:
         logger.info("scheduler iniciado")
 
     async def shutdown(self, app: Application) -> None:
-        self.scheduler.shutdown(wait=False)
+        if self.scheduler.running:
+            self.scheduler.shutdown(wait=False)
         await self.engine.dispose()
         logger.info("recursos liberados")
