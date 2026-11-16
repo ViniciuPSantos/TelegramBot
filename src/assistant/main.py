@@ -12,6 +12,7 @@ from assistant.core.errors import error_handler
 from assistant.core.handlers import start
 from assistant.db.engine import create_engine, create_session_factory
 from assistant.logging_config import setup_logging
+from assistant.modules.prices import module as prices
 from assistant.modules.reminders import module as reminders
 
 logger = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 ModuleRegistrar = Callable[[Application, AppContext], None]
 
 
-MODULES: list[ModuleRegistrar] = [reminders.register]
+MODULES: list[ModuleRegistrar] = [reminders.register, prices.register]
 
 
 def build_context(settings: Settings) -> AppContext:
