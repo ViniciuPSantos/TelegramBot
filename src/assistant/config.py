@@ -19,13 +19,14 @@ class Settings(BaseSettings):
     allowed_chat_id: int
 
     # Infra
-    database_url: str = "sqlite+aiossqlite:///./data/assistant.db"
+    database_url: str = "sqlite+aiosqlite:///./data/assistant.db"
     timezone: str = "America/Sao_Paulo"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     log_format: Literal["text", "json"] = "text"
     # Lembretes
     reminder_default_hour: int = Field(default=9, ge=0, le=23)
     reminder_poll_seconds: int = Field(default=30, ge=5)
+    price_poll_minutes: int = Field(default=10, ge=1)
 
     @field_validator("timezone")
     @classmethod

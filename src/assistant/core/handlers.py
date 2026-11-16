@@ -8,7 +8,11 @@ WELCOME_TEXT = (
     "   ex.: /lembrete amanha 10:00 dentista\n"
     "   ex.: /lembrete 15/11 pagar fatura --antes 3\n"
     "/lembretes: lista os pendentes\n"
-    "/concluidos: últimos 10 concluídos"
+    "/concluidos: últimos 10 concluídos\n\n"
+    "🛒 Monitor de preços\n"
+    "/monitorar <link> [alvo]: monitora um produto\n"
+    "   ex.: /monitorar https://www.kabum.com.br/produto/123/ssd 1.149,90\n"
+    "/produtos: lista os monitorados"
 )
 
 BOT_COMMANDS = [
@@ -16,6 +20,8 @@ BOT_COMMANDS = [
     BotCommand("lembrete", "Cria um lembrete"),
     BotCommand("lembretes", "Lista os lembretes pendentes"),
     BotCommand("concluidos", "Ultimos lembretes concluidos"),
+    BotCommand("monitorar", "Monitora o preço de um produto"),
+    BotCommand("produtos", "Lista os produtos monitorados"),
 ]
 
 
