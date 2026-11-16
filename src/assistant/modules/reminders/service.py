@@ -1,5 +1,5 @@
 import logging
-from collections.abc import AsyncIterator, Callable, Sequence
+from collections.abc import AsyncIterator, Sequence
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -8,21 +8,17 @@ from typing import Protocol
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
+from assistant.core.clock import Clock, utc_now
 from assistant.modules.reminders.models import TEXT_MAX_LENGTH, Reminder, ReminderStatus
 from assistant.modules.reminders.parser import ParsedReminder
 from assistant.modules.reminders.repository import ReminderRepository
 
 logger = logging.getLogger(__name__)
 
-Clock = Callable[[], datetime]
 
 DONE_LIST_LIMIT = 10
 SNOOZE_DELTA = timedelta(hours=1)
 LATE_TOLERANCE = timedelta(minutes=5)
-
-
-def utc_now() -> datetime:
-    return datetime.now(UTC)
 
 
 class ReminderNotFoundError(Exception):
